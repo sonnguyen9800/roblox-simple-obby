@@ -15,7 +15,16 @@ local dataMod = {};
 
 dataMod.Load = function(player)
     local key = player.UserId
-    local data = store:GetAsync(key);
+    local data = nil
+    local success, err = pcall(function()
+         data = store:GetAsync(key);
+
+    end)
+
+    if not success then
+        print("Error: "..err.. ". Retry loading.");
+        dataMod.Load(player)
+    end
     return data;
 end
 
@@ -70,9 +79,20 @@ end
 dataMod.save = function(player)
     local key = player.UserId
     local data = dataMod.recursiveCopy(sessionData[key])
-    store:SetAsync(key, data)
-    print("Data of "..player.Name.." has been saved")
+
+    local success, error = pcall(function()
+        store:SetAsync(key, data)    
+    end)
+
+    if success then
+        print("Data of "..player.Name.." has been saved")
+    else
+        print("Save error"..error..". Retry start.")
+        dataMod.save(player);
+    end
 end
+
+
 
 dataMod.removeSessionData = function(player)
     local key = player.UserId
