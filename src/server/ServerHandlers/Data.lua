@@ -99,6 +99,22 @@ dataMod.removeSessionData = function(player)
     sessionData[key] = nil
 end
 
+-- Auto save after interval 
+
+local function autoSave()
+    local timeInterval = defineModule.Time.AUTOSAVE_INTERVAL
+
+    while task.wait(timeInterval) do
+        print("Auto saving for all users");
+        for key, value in pairs(sessionData) do
+            local player = playersService:GetPlayerByUserId(key)
+            dataMod.save(player)
+        end
+    end
+
+end
+
+task.spawn(autoSave);
 
 -- Connect to PlayerServices
 playersService.PlayerAdded:Connect(function(player)
@@ -124,6 +140,15 @@ playersService.PlayerRemoving:Connect(function(player)
     dataMod.removeSessionData(player)
 end)
 
+game:BindToClose(function()
+    print("Game Close: Save all player data");
+    for key, value in pairs(sessionData) do
+        
+        local player = playersService:GetPlayerByUserId(key)
+        dataMod.save(player)
+        player:Kick(defineModule.Annoucement.Shutdown)
+    end
+end)
 
 -- Added Funtion
 dataMod.recursiveCopy = function(dataTable)
