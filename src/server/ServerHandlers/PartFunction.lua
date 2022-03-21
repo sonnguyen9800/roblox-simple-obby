@@ -2,7 +2,7 @@ local playerService = game:GetService("Players")
 local replicatedStorage = game:GetService("ReplicatedStorage")
 
 local dataMod = require(script.Parent.Data);
-
+local defineModule = require(script.Parent.Define);
 
 local partFunctionMods = {}
 
@@ -47,5 +47,39 @@ partFunctionMods.DamageParts = function(part)
     end)
 
 end
+
+partFunctionMods.SpawnParts = function(part)
+    local stage = part.Stage.Value
+
+    part.Touched:Connect(function(hit)
+        local player, model = partFunctionMods.playerFromHit(part);
+
+        if player and dataMod.get(player, defineModule.StageName) == stage -1 then
+            dataMod.set(player, defineModule.StageName, stage)
+        end
+        
+    end)
+end
+
+
+--Attach script to part
+local partGroups = {
+	workspace.KillParts;
+	workspace.DamageParts;
+	workspace.SpawnParts;
+	--workspace.RewardParts;
+	--workspace.BadgeParts;
+	--workspace.PurchaseParts;
+	--workspace.ShopParts;
+}
+
+for _, group in pairs(partGroups) do
+	for _, part in pairs(group:GetChildren()) do
+		if part:IsA("BasePart") then
+			partFunctionMods[group.Name](part)
+		end
+	end
+end
+
 
 return partFunctionMods
