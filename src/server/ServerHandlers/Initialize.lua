@@ -12,6 +12,9 @@ local function getStage(stageNum)
     end
 
     for _, stagePart in pairs(spawnParts:GetChildren()) do
+        if not stagePart.Stage then
+            return nil
+        end
         
         if stagePart.Stage.Value == stageNum then
             return stagePart

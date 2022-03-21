@@ -18,6 +18,10 @@ local Define = {
 
     Annoucement = {
         Shutdown = "Shutting Down game. All Data will be saved"
+    },
+
+    FolderTags = {
+        Coint = "CoinTags"
     }
 }
 

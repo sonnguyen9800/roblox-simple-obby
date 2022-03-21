@@ -1,5 +1,6 @@
 local playerService = game:GetService("Players")
 local replicatedStorage = game:GetService("ReplicatedStorage")
+local badgeService = game:GetService("BadgeService")
 
 local dataMod = require(script.Parent.Data);
 local defineModule = require(script.Parent.Define);
@@ -61,14 +62,58 @@ partFunctionMods.SpawnParts = function(part)
     end)
 end
 
+-- Coin Related
+local partIndex = 0
+partFunctionMods.RewardParts = function(part)
+    local reward = part.Reward.Value
+    local code = partIndex
+    partIndex = partIndex + 1
+
+    part.Touched:Connect(function(hit)
+        local player = partFunctionMods.playerFromHit(hit)
+        if player then
+            local tagFolder = player:FindFirstChild("CoinTags")
+            if not tagFolder then
+                tagFolder = Instance.new("Folder");
+                tagFolder.Name = defineModule.FolderTags.Coin
+                tagFolder.Parent = player
+            end
+
+            if not tagFolder:FindFirstChild(code) then
+                dataMod.increment(player, defineModule.CoinName, reward)
+                local codeTag = Instance.new("BoolValue")
+                codeTag.Name = code
+                codeTag.Parent = tagFolder
+            end
+        end
+    end)
+end
+
+--Badge
+partFunctionMods.BadgePart = function(part)
+    local partId =part.BadgeId.Value
+    part.Touched:Connect(function(hit)
+        local player = partFunctionMods.playerFromHit(hit)
+
+        if player then
+            local key = player.UserId
+            local hasBadge = badgeService:UserHasBadgeAsync(key, partId)
+            
+            if not hasBadge then
+                badgeService:AwardBadge(key, partId)
+            end
+        end
+    end)
+end
+
 
 --Attach script to part
 local partGroups = {
 	workspace.KillParts;
 	workspace.DamageParts;
 	workspace.SpawnParts;
-	--workspace.RewardParts;
-	--workspace.BadgeParts;
+	workspace.RewardParts;
+	workspace.BadgeParts;
 	--workspace.PurchaseParts;
 	--workspace.ShopParts;
 }
