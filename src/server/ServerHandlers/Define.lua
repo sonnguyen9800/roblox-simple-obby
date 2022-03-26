@@ -21,8 +21,22 @@ local Define = {
     },
 
     FolderTags = {
-        Coint = "CoinTags"
+        Coin = "CoinTags"
+    },
+
+    Items = {
+        SpringPotion = {
+            JumpPower = 90;
+            EffectDuration = 20
+        }
+    },
+
+    PlayerCharacter = {
+        DefaultJumpPower = 50
     }
+
+
+
 }
 
 return Define;
