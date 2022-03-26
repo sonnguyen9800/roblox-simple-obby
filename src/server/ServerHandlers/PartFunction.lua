@@ -133,7 +133,7 @@ local partGroups = {
 	workspace.SpawnParts;
 	workspace.RewardParts;
 	workspace.BadgeParts;
-	--workspace.PurchaseParts;
+	workspace.PurchaseParts;
 	--workspace.ShopParts;
 }
 
