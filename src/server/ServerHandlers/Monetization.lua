@@ -46,4 +46,7 @@ marketplaceService.PromptGamePassPurchaseFinished:Connect(function(player, gameP
         monetizationModule[gamePassId](player)
     end
 end)
+
+
+
 return monetizationModule

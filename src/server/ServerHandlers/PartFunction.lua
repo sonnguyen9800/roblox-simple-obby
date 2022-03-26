@@ -1,7 +1,7 @@
 local playerService = game:GetService("Players")
 local replicatedStorage = game:GetService("ReplicatedStorage")
 local badgeService = game:GetService("BadgeService")
-
+local marketplaceService = game:GetService("MarketplaceService")
 local dataMod = require(script.Parent.Data);
 local defineModule = require(script.Parent.Define);
 
@@ -101,6 +101,25 @@ partFunctionMods.BadgePart = function(part)
             
             if not hasBadge then
                 badgeService:AwardBadge(key, partId)
+            end
+        end
+    end)
+end
+
+
+-- Market
+
+partFunctionMods.PurchaseParts = function(part)
+    local promptId = part.PromptId.Value;
+    local isProduct = part.isProduct.Value;
+
+    part.Touched:Connect(function(hit)
+        local player = partFunctionMods.playerFromHit(hit)
+        if player then
+            if isProduct  then
+                marketplaceService:PromptProductPurchase(player, promptId);
+            else
+                marketplaceService:PromptGamePassPurchase(player, promptId);
             end
         end
     end)
