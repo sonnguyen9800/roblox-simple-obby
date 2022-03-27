@@ -25,7 +25,9 @@ local Define = {
     },
 
     Items = {
-        SpringPotion = {
+        ["SpringPotion"] = {
+            Name = "Spring Potion",
+            CoinPrice =  5,
             JumpPower = 90;
             EffectDuration = 20
         }

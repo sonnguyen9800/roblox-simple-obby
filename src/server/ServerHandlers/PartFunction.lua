@@ -125,6 +125,24 @@ partFunctionMods.PurchaseParts = function(part)
     end)
 end
 
+--Shop
+partFunctionMods.ShopParts = function(part)
+    
+    local itemname = part.ItemName.Value
+    local item = defineModule.Items[itemname]
+
+    part.Touched:Connect(function(hit)
+        local player = partFunctionMods.playerFromHit(hit)
+        if (player and dataMod.get(player, defineModule.CoinName) >= item.CoinPrice) then
+            dataMod.increment(part, defineModule.CoinName, -item.CoinPrice)
+            local shopFolder = replicatedStorage.Common.ShopItems;
+            local tool = shopFolder:FindFirstChild(itemname):Clone()
+            tool.Parent = player.Backpack
+        end
+        
+    end)
+end
+
 
 --Attach script to part
 local partGroups = {
@@ -134,7 +152,7 @@ local partGroups = {
 	workspace.RewardParts;
 	workspace.BadgeParts;
 	workspace.PurchaseParts;
-	--workspace.ShopParts;
+	workspace.ShopParts;
 }
 
 for _, group in pairs(partGroups) do
