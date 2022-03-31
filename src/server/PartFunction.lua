@@ -4,7 +4,7 @@ local badgeService = game:GetService("BadgeService")
 local marketplaceService = game:GetService("MarketplaceService")
 local dataMod = require(script.Parent.Data);
 local defineModule = require(script.Parent.Define);
-
+--require "ReplicatedStorage.Common.Libs.trycatch"
 local partFunctionMods = {}
 
 
@@ -93,7 +93,7 @@ partFunctionMods.RewardParts = function(part)
 end
 
 --Badge
-partFunctionMods.BadgePart = function(part)
+partFunctionMods.BadgeParts = function(part)
     local partId =part.BadgeId.Value
     part.Touched:Connect(function(hit)
         local player = partFunctionMods.playerFromHit(hit)
@@ -154,8 +154,8 @@ local partGroups = {
 	workspace.SpawnParts;
 	workspace.RewardParts;
 	workspace.BadgeParts;
-	workspace.PurchaseParts;
-	workspace.ShopParts;
+	--workspace.PurchaseParts;
+	--workspace.ShopParts;
 }
 
 for _, group in pairs(partGroups) do

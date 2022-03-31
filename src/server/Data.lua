@@ -3,7 +3,7 @@ local playersService = game:GetService("Players")
 local dataStoreService = game:GetService("DataStoreService")
 
 --Load the Define Module
-local defineModule = require(game.ServerScriptService.Server.ServerHandlers.Define);
+local defineModule = require(game.ServerScriptService.Server.Define);
 
 
 local store = dataStoreService:GetDataStore(defineModule.DataStorageId);

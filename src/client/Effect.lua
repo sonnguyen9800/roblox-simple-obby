@@ -22,7 +22,7 @@ local function emitParticles(part, amount)
     return emitter
 end
 --Replicated Storage: Remote Event - Effect
-replicatedStorage.Effect.OnClientEvent:Connect(function(part)
+replicatedStorage.Common.Events.Effect.OnClientEvent:Connect(function(part)
     local folder = part.Parent.Name
     effectsModule[folder](part)
 end)
@@ -51,25 +51,13 @@ end
 local rotParts = {}
 
 local partGroups = {
-    workspace.KillParts;
-    workspace.DamageParts;
-    workspace.SpawnParts;
-    workspace.RewardParts;
-    workspace.PurchaseParts;
-    workspace.BadgePart;
-    workspace.ShopParts;
-}
-
-local rotParts = {}
-
-local partGroups = {
 	workspace.KillParts;
 	workspace.DamageParts;
 	workspace.SpawnParts;
 	workspace.RewardParts;
 	workspace.BadgeParts;
-	workspace.PurchaseParts;
-	workspace.ShopParts;
+	--workspace.PurchaseParts;
+	--workspace.ShopParts;
 }
 
 for _, group in pairs(partGroups) do
