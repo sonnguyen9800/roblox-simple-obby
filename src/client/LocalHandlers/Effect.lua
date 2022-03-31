@@ -1,5 +1,5 @@
 local replicatedStorage = game:GetService("ReplicatedStorage")
-
+local runService = game:GetService("RunService")
 local effectsModule = {}
 
 --Local
@@ -44,5 +44,54 @@ effectsModule.SpawnParts = function(part)
     end)
     
 end
+
+
+-- Rotation Modules
+
+local rotParts = {}
+
+local partGroups = {
+    workspace.KillParts;
+    workspace.DamageParts;
+    workspace.SpawnParts;
+    workspace.RewardParts;
+    workspace.PurchaseParts;
+    workspace.BadgePart;
+    workspace.ShopParts;
+}
+
+local rotParts = {}
+
+local partGroups = {
+	workspace.KillParts;
+	workspace.DamageParts;
+	workspace.SpawnParts;
+	workspace.RewardParts;
+	workspace.BadgeParts;
+	workspace.PurchaseParts;
+	workspace.ShopParts;
+}
+
+for _, group in pairs(partGroups) do
+	for _, part in pairs(group:GetChildren()) do
+		if part:IsA("BasePart") then
+			if part:FindFirstChild("Rotate") then
+				table.insert(rotParts, part)
+			end
+		end
+	end
+end
+
+runService.RenderStepped:Connect(function(dt)
+	for _, part in pairs(rotParts) do
+		local rot = part.Rotate.Value
+		rot = rot * dt
+		rot = rot * ((2 * math.pi) / 360)
+		rot = CFrame.Angles(rot.X, rot.Y, rot.Z)
+		
+		part.CFrame = part.CFrame * rot
+	end
+end)
+
 
 return effectsModule;
