@@ -4,12 +4,12 @@ local Define = {
 
     DataStorageId = "DataStorageV1",
 
-    LeaderstartsName = "Player's Status",
-    CoinName = "Lucky Gold",
+    LeaderstartsName = "Stats",
+    CoinName = "LuckyGold",
     StageName = "Trial",
     DefaultPlayerData = {
         CoinName = 0,
-        StageName = 1
+        Trial = 1
     },
 
     Time = {

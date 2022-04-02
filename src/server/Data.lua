@@ -38,10 +38,6 @@ dataMod.SetupData = function(player)
     defaultData[defineModule.CoinName] = 0;
     defaultData[defineModule.StageName] = 1;
     sessionData[key] = dataMod.recursiveCopy(defaultData);
-    print("Session Data Print:")
-    for key,value in pairs(sessionData[key]) do
-        print("Key "..key.. " Value: "..value)
-    end
 
     if (data) then
         for index, value in pairs(data) do
@@ -81,7 +77,7 @@ end
 
 dataMod.updateLeaderBoard = function(player, stats, value)
     local leaderstartsName = defineModule.LeaderstartsName
-    player[leaderstartsName][stats].value = value
+    player[leaderstartsName][stats].Value = value
 end
 
 dataMod.save = function(player)
@@ -126,7 +122,6 @@ task.spawn(autoSave);
 
 -- Connect to PlayerServices
 playersService.PlayerAdded:Connect(function(player)
-    print("Data: Player Added")
     local folder = Instance.new("Folder");
     folder.Name = defineModule.LeaderstartsName
     folder.Parent = player
