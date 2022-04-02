@@ -20,9 +20,8 @@ end
 
 -- Global Function
 partFunctionMods.KillParts = function(part)
-
     part.Touched:Connect(function(hit)
-        local player, model = partFunctionMods.playerFromHit(part);
+        local player, model = partFunctionMods.playerFromHit(hit);
         if player and model.Humanoid.Health > 0 then
             model.Humanoid.Health = 0
         end
