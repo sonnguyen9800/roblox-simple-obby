@@ -57,7 +57,7 @@ partFunctionMods.SpawnParts = function(part)
 
         if player and dataMod.get(player, defineModule.StageName) == stage -1 then
             dataMod.set(player, defineModule.StageName, stage)
-            replicatedStorage.Effect:FireClient(player, part)
+            replicatedStorage.Common.Events.Effect:FireClient(player, part)
         end
         
     end)
@@ -85,7 +85,7 @@ partFunctionMods.RewardParts = function(part)
                 local codeTag = Instance.new("BoolValue")
                 codeTag.Name = code
                 codeTag.Parent = tagFolder
-                replicatedStorage.Effect:FireClient(player, part)
+                replicatedStorage.Common.Events.Effect:FireClient(player, part)
 
             end
         end

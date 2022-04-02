@@ -7,7 +7,7 @@ local function playSound(part)
     local sound = part:FindFirstChildOfClass("Sound");
 
     if sound then
-        sound.Play()
+        sound:Play()
     end
     return sound;
 end
@@ -17,7 +17,7 @@ local function emitParticles(part, amount)
     local emitter = part:FindFirstChildOfClass("ParticleEmitter");
 
     if emitter then
-        emitter.Emit(amount)
+        emitter:Emit(amount)
     end
     return emitter
 end
