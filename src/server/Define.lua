@@ -8,8 +8,8 @@ local Define = {
     CoinName = "Lucky Gold",
     StageName = "Trial",
     DefaultPlayerData = {
-        CoinsDefault = 0,
-        StageDefault = 1
+        CoinName = 0,
+        StageName = 1
     },
 
     Time = {

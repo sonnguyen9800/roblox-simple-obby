@@ -24,10 +24,13 @@ local function getStage(stageNum)
 end
 
 playersServices.PlayerAdded:Connect(function(player)
-    
+    print("Init: Flag 0")
+
     player.CharacterAdded:Connect(function(char)
-        
+        print("Init: Flag 1")
         local stageNum = dataMod.get(player, defineModule.StageName);
+        print("Init: Stage Num " ..stageNum)
+
         local spawnPoint = getStage(stageNum);
         if spawnPoint then
             char:SetPrimaryPartCFrame(spawnPoint.CFrame * CFrame.new(0,3,0));
