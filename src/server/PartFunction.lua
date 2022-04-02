@@ -40,7 +40,7 @@ partFunctionMods.DamageParts = function(part)
             delay = true
             local Humanoid = charModel.Humanoid;
             Humanoid.Health  = Humanoid.Health - damageValue
-            delay(0.1, function()
+            task.delay(0.1, function()
                 delay = false
             end)
 
